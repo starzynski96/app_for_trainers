@@ -2,8 +2,8 @@ package akademia.app_for_trainers.Controller;
 
 import akademia.app_for_trainers.Models.TrainersModel;
 import akademia.app_for_trainers.Service.TrainersService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
@@ -18,7 +18,19 @@ public class TrainersController {
     }
 
     @GetMapping("api/v1/all")
-    public List<TrainersModel> getAllReservation(){
+    public List<TrainersModel> getAllReservation() {
         return trainersService.getAll();
+    }
+
+    @PostMapping("api/v1/trainer")
+    public ResponseEntity<?> addReservation(@RequestBody TrainersModel trainersModel) {
+        return trainersService.addReservaation(trainersModel);
+
+    }
+
+    @PutMapping("/api/v1/trainer")
+    public ResponseEntity<?> updateResrevation(@RequestBody TrainersModel trainersModel, @RequestParam long id) {
+        return trainersService.updateCar(trainersModel, id);
+
     }
 }
