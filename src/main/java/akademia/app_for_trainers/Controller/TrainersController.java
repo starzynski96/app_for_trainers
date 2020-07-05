@@ -21,6 +21,19 @@ public class TrainersController {
     public List<TrainersModel> getAllReservation() {
         return trainersService.getAll();
     }
+    @GetMapping("api/v1/all/byName")
+    public List<TrainersModel> getByName(@RequestParam String name) {
+        return trainersService.getByName(name);
+    }
+    @GetMapping("api/v1/all/bySurname")
+    public List<TrainersModel> getBySurname(@RequestParam String surname) {
+        return trainersService.getBySurname(surname);
+    }
+    @GetMapping("api/v1/all/byDate")
+    public List<TrainersModel> getByDate (@RequestParam String date) {
+        return trainersService.getReservationByTime(date);
+    }
+
 
     @PostMapping("api/v1/trainer")
     public ResponseEntity<?> addReservation(@RequestBody TrainersModel trainersModel) {
@@ -32,5 +45,10 @@ public class TrainersController {
     public ResponseEntity<?> updateResrevation(@RequestBody TrainersModel trainersModel, @RequestParam long id) {
         return trainersService.updateCar(trainersModel, id);
 
+    }
+
+    @DeleteMapping("/api/v1/trainer/{id}")
+    public ResponseEntity<?> deleteByID ( @PathVariable(value = "id") long id){
+        return trainersService.deleteById(id);
     }
 }
